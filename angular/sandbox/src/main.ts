@@ -11,11 +11,4 @@ if (environment.production) {
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
-  .then((appRef) => {
-    const injector = appRef.injector;
-    const notesService = injector.get(NotesService);
-    notesService.getNotes().subscribe((notes) => {
-      console.log(notes);
-    });
-  })
   .catch((err) => console.error(err));
