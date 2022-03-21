@@ -1,0 +1,6 @@
+<ul *ngIf="notes">
+  <li *ngFor="let note of notes">
+    <h2>{{ note.title }}</h2>
+    <div>{{ note.body }}</div>
+  </li>
+</ul>
