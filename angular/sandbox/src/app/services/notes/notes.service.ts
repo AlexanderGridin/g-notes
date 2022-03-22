@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { AppModule } from 'src/app/app.module';
 import { NotesListComponent } from 'src/app/components/notes-list/notes-list.component';
+import { ApiModule } from 'src/app/modules/api/api.module';
 
-@Injectable({
-  providedIn: AppModule,
-})
+@Injectable()
 export class NotesService {
   public constructor() {}
 
