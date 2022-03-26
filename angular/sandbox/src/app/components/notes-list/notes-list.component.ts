@@ -22,6 +22,7 @@ export const INJECTION_TOKEN = new InjectionToken<User>('URL', {
 })
 export class NotesListComponent implements OnInit {
   public notes!: Array<Note>;
+  public readonly str = 'test string for pipe';
 
   public constructor(
     private readonly service: NotesService,
