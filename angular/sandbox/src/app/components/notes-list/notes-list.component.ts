@@ -1,4 +1,5 @@
 import { Component, Inject, InjectionToken, OnInit } from '@angular/core';
+import { NameService } from 'src/app/services/name/name.service';
 import { Note, NotesService } from 'src/app/services/notes/notes.service';
 
 export interface User {
@@ -17,7 +18,7 @@ export const INJECTION_TOKEN = new InjectionToken<User>('URL', {
   selector: 'app-notes-list',
   templateUrl: './notes-list.component.html',
   styleUrls: ['./notes-list.component.css'],
-  providers: [{ provide: NotesService, useClass: NotesService }],
+  providers: [{ provide: NotesService, useClass: NotesService }, NameService],
 })
 export class NotesListComponent implements OnInit {
   public notes!: Array<Note>;

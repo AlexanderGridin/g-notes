@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { AppModule } from 'src/app/app.module';
-import { NotesListComponent } from 'src/app/components/notes-list/notes-list.component';
-import { ApiModule } from 'src/app/modules/api/api.module';
+import { NameService } from '../name/name.service';
 
 @Injectable()
 export class NotesService {
-  public constructor() {}
+  public constructor(private readonly nameService: NameService) {}
 
   public getNotes(): Observable<Array<Note>> {
+    console.log(this.nameService.getName());
     return of(notes);
   }
 }
