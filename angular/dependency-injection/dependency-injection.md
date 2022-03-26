@@ -355,3 +355,67 @@ export class AppModule {}
 > Если одна и та же зависимость будет зарегистрирована и в модуле и в компоненте, то в приложении будут существовать **два разных экземпляра одной и той же зависимости**.
 
 > Если только одному компоненту нужен доступ к сервису, то этот сервис лучше всего регистрировать в компоненте. В противном случае - лучше регистрировать зависимость в root module.
+
+## DI без использования типов
+
+Так же, благодаря декоратору **@Inject()** можно **не использовать типы** при инъекции зависимостей.
+
+C помощью этого декоратора можно инжектить как сервисы, так и **простые значения**.
+
+```ts
+// Файл notes-list.component.ts
+
+// Определяем токен
+export const INJECTION_TOKEN = new InjectionToken<string>("URL");
+
+@Component({
+  selector: "app-notes-list",
+  templateUrl: "./notes-list.component.html",
+  styleUrls: ["./notes-list.component.css"],
+  providers: [{ provide: NotesService, useClass: NotesService }],
+})
+export class NotesListComponent implements OnInit {
+  public notes!: Array<Note>;
+
+  public constructor(
+    private readonly service: NotesService,
+    // Зависимость инжектится по токену
+    @Inject(INJECTION_TOKEN) private readonly url: string
+  ) {}
+
+  public ngOnInit(): void {
+    console.log(this.url);
+
+    this.service.getNotes().subscribe((notes: Array<Note>) => {
+      this.notes = notes;
+    });
+  }
+}
+
+// Файл app.module.ts
+@NgModule({
+  declarations: [AppComponent, NotesListComponent],
+  imports: [BrowserModule, AppRoutingModule],
+  providers: [
+    {
+      provide: INJECTION_TOKEN,
+      // Указваем, какое значение инжектить по данному токену
+      useValue: "Injection token",
+    },
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
+
+Так же токен можно сразу регистрировать вместе с инжектируемым значением с помощью **provideIn**:
+
+```ts
+export const INJECTION_TOKEN = new InjectionToken<User>("URL", {
+  providedIn: "root",
+  factory: () => ({
+    name: "test",
+    age: 25,
+  }),
+});
+```
