@@ -1,3 +1,11 @@
+## Installation
+`sudo add-apt-repository ppa:neovim-ppa/stable`
+
+`sudo apt-get update`
+
+`sudo apt-get install neovim`
+
+## Commands
 `i` - insert mode (before cursor)
 `a` - insert mode (after cursor)
 `o` - insert mode line below
