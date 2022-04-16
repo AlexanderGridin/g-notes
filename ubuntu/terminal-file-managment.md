@@ -12,7 +12,9 @@
 
 `rmdir [emptyDirectoryName]` - remove empty directory
 
-`mv [fileName] [newPlace]` - move file
+`rm -r [folderName]` - delete the folder and subfolders, even if it is non-empty
+
+`mv [fileName] [newPlace]` - move file. Also by this command we can move folders. The `mv` command doesn't have an `-R` flag, it moves folders recursively
 
 `cp [fileName] [targetPlace]` - copy file
 
