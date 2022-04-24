@@ -1,4 +1,6 @@
-<h2>{{ str | testPipe: 21:55 }}</h2>
+<h2 [appTestDirective]="'hello app test directive'">
+  {{ str | testPipe: 21:55 }}
+</h2>
 
 <ul *ngIf="notes">
   <li *ngFor="let note of notes">
@@ -6,3 +8,12 @@
     <div>{{ note.body }}</div>
   </li>
 </ul>
+
+<div>
+  <p #child>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero quo,
+    quibusdam asperiores, hic eius illum expedita dolore aspernatur et soluta
+    quasi quod autem? Voluptatibus harum similique sunt fuga, architecto aperiam
+    possimus suscipit velit excepturi obcaecati.
+  </p>
+</div>

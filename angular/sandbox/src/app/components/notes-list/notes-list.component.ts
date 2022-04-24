@@ -1,4 +1,11 @@
-import { Component, Inject, InjectionToken, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  InjectionToken,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { NameService } from 'src/app/services/name/name.service';
 import { Note, NotesService } from 'src/app/services/notes/notes.service';
 
@@ -24,6 +31,9 @@ export class NotesListComponent implements OnInit {
   public notes!: Array<Note>;
   public readonly str = 'test string for pipe';
 
+  @ViewChild('child', { static: true })
+  childComponent!: ElementRef<HTMLElement>;
+
   public constructor(
     private readonly service: NotesService,
     @Inject(INJECTION_TOKEN) private readonly user: User
@@ -31,6 +41,7 @@ export class NotesListComponent implements OnInit {
 
   public ngOnInit(): void {
     console.log(this.user);
+    console.log(this.childComponent?.nativeElement);
 
     this.service.getNotes().subscribe((notes: Array<Note>) => {
       this.notes = notes;
